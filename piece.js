@@ -4,6 +4,7 @@ class Piece {
     color;
     shape;
     ctx;
+    typeId;
 
     constructor(ctx) {
         this.ctx = ctx;
@@ -11,10 +12,9 @@ class Piece {
     }
 
     spawn() {
-        const typeId = this.randomizeTetrominoType(SHAPES.length-1);
-        console.log('typeId : ' + typeId);
-        this.shape = SHAPES[typeId];
-        this.color = COLORS[typeId];
+        this.typeId = this.randomizeTetrominoType(SHAPES.length-1);
+        this.shape = SHAPES[this.typeId];
+        this.color = COLORS[this.typeId];
 
         // Starting position.
         this.x = 3;
@@ -40,6 +40,10 @@ class Piece {
         this.x = p.x;
         this.y = p.y;
         this.shape = p.shape;
+    }
+
+    setStartingPosition() {
+        this.x = this.typeId === 4 ? 4 : 3;
     }
 
     randomizeTetrominoType(noOfTypes) {
